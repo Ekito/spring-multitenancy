@@ -1,4 +1,4 @@
 spring-multitenancy
 ===================
 
-Spring boot example with multitenancy
+Spring web application Multitenancy example
