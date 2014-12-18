@@ -1,0 +1,19 @@
+{
+  "name": "angular-i18n",
+  "version": "1.2.26",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "homepage": "https://github.com/angular/bower-angular-i18n",
+  "_release": "1.2.26",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.26",
+    "commit": "d3b29dbaf7f83fc0ff095a6972fc335b062525fb"
+  },
+  "_source": "git://github.com/angular/bower-angular-i18n.git",
+  "_target": "1.2.26",
+  "_originalSource": "angular-i18n"
+}

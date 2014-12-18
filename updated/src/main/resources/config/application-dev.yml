@@ -1,0 +1,30 @@
+server:
+    port: 8080
+
+spring:
+    profiles:
+        active: dev
+    data:
+        mongodb:
+            host: localhost
+            port: 27017
+            database: myApp
+    
+
+    mail:
+        baseUrl: http://localhost:8080
+
+    thymeleaf:
+        mode: XHTML
+        cache: false
+        viewNames: error
+
+metrics:
+    jmx.enabled: true
+    graphite:
+        enabled: false
+        host: localhost
+        port: 2003
+        prefix: myApp
+
+

@@ -1,0 +1,42 @@
+server:
+    port: 10344
+    address: localhost
+
+
+# security configuration (this key should be unique for your application, and kept secret)
+jhipster.security.rememberme.key: myApp
+
+async:
+    corePoolSize: 2
+    maxPoolSize: 50
+    queueCapacity: 10000
+
+spring:
+    
+    data:
+        mongodb:
+             host: localhost
+             port: 27017
+             database: myApp
+    
+
+    mail:
+        host: localhost
+        port: 25
+        user:
+        password:
+        protocol: smtp
+        tls: false
+        auth: false
+
+metrics:
+    jmx.enabled: false
+
+swagger:
+    apiDocsLocation: http://localhost:8080
+    title: jhipster API
+    description: jhipster applications and beyond!
+    termsOfServiceUrl: http://jhipster.github.io/
+    contact:
+    license: Apache 2.0
+    licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html

@@ -1,0 +1,14 @@
+<mongoChangeLog>
+    <changeSet changeId="ChangeSet-3" author="ekito">
+        <script>
+            db.T_DOMAIN.insert(
+            {
+                "name": "admin_domain"
+            });
+            db.T_DOMAIN.insert(
+            {
+                "name": "user_domain"
+            });
+        </script>
+    </changeSet>
+</mongoChangeLog>

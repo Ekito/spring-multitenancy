@@ -1,0 +1,18 @@
+{
+  "generator-jhipster": {
+    "baseName": "myApp",
+    "packageName": "fr.ekito.example",
+    "packageFolder": "fr/ekito/example",
+    "authenticationType": "token",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "nosql",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "8"
+  }
+}
