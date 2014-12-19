@@ -18,7 +18,36 @@ import java.util.Collection;
  */
 public final class SecurityUtils {
 
-    //...
+    private static final Logger logger = LoggerFactory.getLogger(SecurityUtils.class);
+
+
+    public static UserRepository userRepository;
+
+
+    private SecurityUtils() {
+    }
+
+    /**
+     * Get the login of the current user.
+     */
+    public static String getCurrentLogin() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        UserDetails springSecurityUser = null;
+        String userName = null;
+
+        if(authentication != null) {
+            if (authentication.getPrincipal() instanceof UserDetails) {
+                springSecurityUser = (UserDetails) authentication.getPrincipal();
+                userName = springSecurityUser.getUsername();
+            } else if (authentication.getPrincipal() instanceof String) {
+                userName = (String) authentication.getPrincipal();
+            }
+        }
+
+        return userName;
+    }
+
     public static Domain getCurrentDomain() {
         Domain domain = null;
         String currentLogin = getCurrentLogin();
