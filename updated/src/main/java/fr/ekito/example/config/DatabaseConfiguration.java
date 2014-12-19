@@ -1,7 +1,7 @@
 package fr.ekito.example.config;
 
 
-import fr.ekito.example.DomainAwareMongoTemplate;
+import fr.ekito.example.MultitenantMongoTemplate;
 import fr.ekito.example.config.oauth2.OAuth2AuthenticationReadConverter;
 import com.mongodb.Mongo;
 import org.mongeez.Mongeez;
@@ -71,7 +71,7 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration  {
 
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
-        return new DomainAwareMongoTemplate(this.mongoDbFactory(), this.mappingMongoConverter());
+        return new MultitenantMongoTemplate(this.mongoDbFactory(), this.mappingMongoConverter());
     }
 
     @Bean
