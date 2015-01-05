@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Utility class for Spring Security.
@@ -48,8 +49,9 @@ public final class SecurityUtils {
         return userName;
     }
 
-    public static Domain getCurrentDomain() {
+    public static Optional<Domain> getCurrentDomain() {
         Domain domain = null;
+        //retrieves the current user's login from the security context
         String currentLogin = getCurrentLogin();
         if (currentLogin != null) {
             if (userRepository != null) {
@@ -60,7 +62,7 @@ public final class SecurityUtils {
                 logger.warn("couldn't get user domain - userRepository is null");
             }
         }
-        return domain;
+        return Optional.of(domain);
     }
 
     /**

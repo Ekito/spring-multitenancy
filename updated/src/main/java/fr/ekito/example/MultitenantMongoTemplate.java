@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
@@ -42,10 +43,11 @@ public class MultitenantMongoTemplate extends MongoTemplate {
     }
 
     private void injectCriteria(Query query) {
-        Domain g = SecurityUtils.getCurrentDomain();
-        if (g != null) {
-            query.addCriteria(where("userDomain").is(g));
-            log.info("inject domain {} in query {}", g, query);
+        Optional<Domain> currentDomain = SecurityUtils.getCurrentDomain();
+        if (currentDomain.isPresent()) {
+            Domain domain = currentDomain.get();
+            query.addCriteria(where("userDomain").is(domain));
+            log.info("inject domain {} in query {}", domain, query);
         }else{
             log.warn("current domain is empty");
         }
