@@ -44,7 +44,10 @@ public class MultitenantMongoTemplate extends MongoTemplate {
 
     private void injectCriteria(Query query) {
         Optional<Domain> currentDomain = SecurityUtils.getCurrentDomain();
-        if (currentDomain.isPresent()) {
+        // check already existing present group criteria
+        boolean criteriaAlreadyExists = query.getQueryObject().containsField("userDomain");
+        
+        if (currentDomain.isPresent() && !criteriaAlreadyExists) {
             Domain domain = currentDomain.get();
             query.addCriteria(where("userDomain").is(domain));
             log.info("inject domain {} in query {}", domain, query);
