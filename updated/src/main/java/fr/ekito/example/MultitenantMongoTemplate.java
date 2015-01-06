@@ -2,6 +2,7 @@ package fr.ekito.example;
 
 import fr.ekito.example.domain.Domain;
 import fr.ekito.example.domain.MultitenantEntity;
+import fr.ekito.example.exception.NoDomainForRequestException;
 import fr.ekito.example.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class MultitenantMongoTemplate extends MongoTemplate {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     public MultitenantMongoTemplate(MongoDbFactory mongoDbFactory, MappingMongoConverter mappingMongoConverter) {
-        super(mongoDbFactory,mappingMongoConverter);
+        super(mongoDbFactory, mappingMongoConverter);
     }
 
     @Override
@@ -46,12 +47,18 @@ public class MultitenantMongoTemplate extends MongoTemplate {
         Optional<Domain> currentDomain = SecurityUtils.getCurrentDomain();
         // check already existing present group criteria
         boolean criteriaAlreadyExists = query.getQueryObject().containsField("userDomain");
-        
-        if (currentDomain.isPresent() && !criteriaAlreadyExists) {
+
+        //need inject criteria
+        if (!criteriaAlreadyExists) {
             Domain domain = currentDomain.get();
-            query.addCriteria(where("userDomain").is(domain));
-            log.info("inject domain {} in query {}", domain, query);
-        }else{
+            if (currentDomain.isPresent()) {
+                query.addCriteria(where("userDomain").is(domain));
+                log.info("inject domain {} in query {}", domain, query);
+            } else {
+                // no domain found
+                throw new NoDomainForRequestException();
+            }
+        } else {
             log.warn("current domain is empty");
         }
     }
